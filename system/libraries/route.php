@@ -45,6 +45,42 @@ class Route
          */
 
         $this->Controller = new $this->Controller;
+
+        /*
+         * Check method availability
+         */
+
+        if (isset($url[1]) && !empty($url[1])) {
+
+            if (method_exists($this->Controller, $url[1])) {
+                /*
+                 * Replace default method on url method
+                 */
+                $this->Method = $url[1];
+                /*
+                 * Remove method from url array
+                 */
+                unset($url[1]);
+            } else {
+
+                die("<div style='background-color:#f1f4f4;color:#afaaaa;border: 1px dotted #afaaaa;padding: 10px; border-radius: 4px'>Sorry Method <strong>" . $url[1] . "</strong> is not found</div>");
+            }
+        }
+
+        /*
+            * Check Parameters availability
+        */
+
+        if(isset($url)){
+
+            $this->Param = $url;
+        } else {
+            $this->Param = [];
+        }
+
+        call_user_func_array([$this->Controller, $this->Method], $this->Param);
+
+
         //echo $this->Controller;
     }
 
