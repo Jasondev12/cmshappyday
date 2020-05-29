@@ -5,13 +5,12 @@ class User_model extends Database
     public function fetch_records()
     {
         
-        if($this->Select("users", "name,address")){
-
-        $store = $this->AllRecords();
+        $this->Select_Where("users", ['id' => 2]);
+        $store = $this->Row();
         echo "<pre>";
         print_r($store);
 
         }
     }
-}
+
 ?>

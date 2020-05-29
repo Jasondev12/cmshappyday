@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 class Database
 {
@@ -27,8 +28,8 @@ class Database
     }
 
     /*
-        * Query method will receive all the database queries
-    */
+     * Query method will receive all the database queries
+     */
     public function Query($query, $options = [])
     {
 
@@ -44,16 +45,16 @@ class Database
     }
 
     /*
-        * Count method count the number of rows from the table
-    */
+     * Count method count the number of rows from the table
+     */
     public function Count()
     {
         return $this->Query->rowCount();
     }
 
     /*
-        * AllCount method count the number of rows from the specified table
-    */
+     * AllCount method count the number of rows from the specified table
+     */
     public function AllCount($table_name)
     {
 
@@ -79,11 +80,12 @@ class Database
     }
 
     /*
-        * Select method accept only the select query
-    */
-    public function Select($table_name, $options = ""){
+     * Select method accept only the select query
+     */
+    public function Select($table_name, $options = "")
+    {
 
-        if(empty($options)){
+        if (empty($options)) {
 
             $this->Query = $this->db->prepare("SELECT * FROM " . $table_name);
             return $this->Query->execute();
@@ -94,6 +96,41 @@ class Database
             return $this->Query->execute();
 
         }
-
     }
+
+    /*
+     * Select_Where method accept the select query along with WHERE statement
+     */
+    public function Select_Where($table_name, $options)
+    {
+        $columns;
+        $db_values;
+        foreach ($options as $key => $values):
+
+            $columns .= $key . " = ? AND ";
+            $db_values .= $values . ",";
+
+        endforeach;
+
+        /*
+         * Remove AND operator from the end of statement
+         */
+        $columns = rtrim($columns, " AND");
+
+        /*
+         * Remove comma from the end of statement
+         */
+        $db_values = rtrim($db_values, ",");
+        /*
+         * Assign string to an array
+         */
+        $db_values = explode(",", $db_values);
+
+        /*
+         * Write the Select_Where query
+         */
+        $this->Query = $this->db->prepare("SELECT * FROM " . $table_name . " WHERE " . $columns);
+        return $this->Query->execute($db_values);
+    }
+
 }
