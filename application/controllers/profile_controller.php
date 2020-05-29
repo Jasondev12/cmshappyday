@@ -8,7 +8,8 @@ class Profile_controller extends Cmshappyday
         // echo 'Profile Controller';
     }
 
-    public function index(){
+    public function index()
+    {
         echo "index method from profile controller";
     }
 
@@ -16,8 +17,9 @@ class Profile_controller extends Cmshappyday
     {
 
         $store_model = $this->model("user_model");
-        $records["peoples_name"] = $store_model->fetch_records();
-        $this->view("user_view", $records);
-
+        $store_model->fetch_records(); 
+        $this->view("user_view");
+        
     }
 }
+?>

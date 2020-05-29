@@ -6,7 +6,7 @@ define("Default_method", "index");
 define("Default_param", []);
 
 /*
-    *Database Parameters
+    * Database Parameters
 */
 
 define('HOST', 'localhost');

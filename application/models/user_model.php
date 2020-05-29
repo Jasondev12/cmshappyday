@@ -4,10 +4,14 @@ class User_model extends Database
 
     public function fetch_records()
     {
+        
+        if($this->Select("users", "name,address")){
 
-        $peoples = ["toi", "moi", "nous", "vous"];
-        return $peoples;
+        $store = $this->AllRecords();
+        echo "<pre>";
+        print_r($store);
 
+        }
     }
-
 }
+?>
