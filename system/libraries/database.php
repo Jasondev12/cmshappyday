@@ -103,8 +103,8 @@ class Database
      */
     public function Select_Where($table_name, $options)
     {
-        $columns;
-        $db_values;
+        $columns="";
+        $db_values="";
         foreach ($options as $key => $values):
 
             $columns .= $key . " = ? AND ";
@@ -133,4 +133,88 @@ class Database
         return $this->Query->execute($db_values);
     }
 
+    /*
+     * Delete method
+     */
+    public function Delete($table_name, $options)
+    {
+        $columns="";
+        $db_values="";
+        foreach ($options as $key => $values):
+
+            $columns .= $key . " = ? AND ";
+            $db_values .= $values . ",";
+
+        endforeach;
+
+        /*
+         * Remove AND operator from the end of statement
+         */
+        $columns = rtrim($columns, " AND");
+
+        /*
+         * Remove comma from the end of statement
+         */
+        $db_values = rtrim($db_values, ",");
+        /*
+         * Assign string to an array
+         */
+        $db_values = explode(",", $db_values);
+
+        /*
+         * Write the Select_Where query
+         */
+        $this->Query = $this->db->prepare("DELETE FROM " . $table_name . " WHERE " . $columns);
+        return $this->Query->execute($db_values);
+    }
+
+    /*
+     * Update method
+     */
+
+    public function Update($table_name, $set_array, $options)
+    {
+
+        // $this->Query = $this->db->prepare("UPDATE users SET name =?, adress = ? WHERE id = ? AND email = ? ");
+        //$this->Query->execute([$name, $address, $id]);
+
+        $set_columns="";
+        $set_values="";
+
+        foreach ($set_array as $key => $values):
+            $set_columns .= $key . " = ?,";
+            $set_values .= $values . ",";
+        endforeach;
+        /*
+         * Remove comma from the right/end of statment/string
+         */
+
+        $set_columns = rtrim($set_columns, ",");
+        
+        $where_columns="";
+        $where_values="";
+        foreach($options as $key => $values):
+
+            $where_columns .= $key . " = ? AND ";
+            $where_values .= $values . ",";
+
+        endforeach;
+        /*
+         * Remove AND operator from the end of statment/string
+         */
+        $where_columns = rtrim($where_columns, " AND");
+        /*
+         * Combine set values and where values
+         */
+        $combine = $set_values.$where_values;
+        $combine = rtrim($combine, ",");
+        $combine = explode(",", $combine);
+        
+        /*
+         * Write the update query
+         */
+
+         $this->Query = $this->db->prepare("UPDATE " . $table_name . " SET " .$set_columns . " WHERE " . $where_columns);
+         return $this->Query->execute($combine);
+    }
 }
