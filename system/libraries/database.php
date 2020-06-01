@@ -103,8 +103,8 @@ class Database
      */
     public function Select_Where($table_name, $options)
     {
-        $columns="";
-        $db_values="";
+        $columns = "";
+        $db_values = "";
         foreach ($options as $key => $values):
 
             $columns .= $key . " = ? AND ";
@@ -138,8 +138,8 @@ class Database
      */
     public function Delete($table_name, $options)
     {
-        $columns="";
-        $db_values="";
+        $columns = "";
+        $db_values = "";
         foreach ($options as $key => $values):
 
             $columns .= $key . " = ? AND ";
@@ -178,8 +178,8 @@ class Database
         // $this->Query = $this->db->prepare("UPDATE users SET name =?, adress = ? WHERE id = ? AND email = ? ");
         //$this->Query->execute([$name, $address, $id]);
 
-        $set_columns="";
-        $set_values="";
+        $set_columns = "";
+        $set_values = "";
 
         foreach ($set_array as $key => $values):
             $set_columns .= $key . " = ?,";
@@ -190,10 +190,10 @@ class Database
          */
 
         $set_columns = rtrim($set_columns, ",");
-        
-        $where_columns="";
-        $where_values="";
-        foreach($options as $key => $values):
+
+        $where_columns = "";
+        $where_values = "";
+        foreach ($options as $key => $values):
 
             $where_columns .= $key . " = ? AND ";
             $where_values .= $values . ",";
@@ -206,15 +206,79 @@ class Database
         /*
          * Combine set values and where values
          */
-        $combine = $set_values.$where_values;
+        $combine = $set_values . $where_values;
         $combine = rtrim($combine, ",");
         $combine = explode(",", $combine);
-        
+
         /*
          * Write the update query
          */
 
-         $this->Query = $this->db->prepare("UPDATE " . $table_name . " SET " .$set_columns . " WHERE " . $where_columns);
-         return $this->Query->execute($combine);
+        $this->Query = $this->db->prepare("UPDATE " . $table_name . " SET " . $set_columns . " WHERE " . $where_columns);
+        return $this->Query->execute($combine);
     }
+
+    /*
+     * Insert method
+     */
+
+    public function Insert($table_name, $columns_values)
+    {
+
+        // $this->Query = $this->db->prepare("INSERT INTO users (name, address ) VALUES (?,?)");
+        // $this->Query->execute([$name, $address]);
+
+        $columns = "";
+        $placeholder = "";
+        $placeholder_values = "";
+        foreach ($columns_values as $key => $values):
+
+            $columns .= $key . ",";
+            /**
+             * Replace colum name on ?,
+             */
+            $placeholder .= str_replace($key, "?,", $key);
+            $placeholder_values .= $values . ",";
+
+        endforeach;
+        /**
+         * Remove comma from the end of string/statement
+         */
+        $columns = rtrim($columns, ",");
+        $placeholder = rtrim($placeholder, ",");
+        $placeholder_values = rtrim($placeholder_values, ",");
+        $placeholder_values = explode(",", $placeholder_values);
+
+        /**
+         * Write Insert Query
+         */
+        $this->Query = $this->db->prepare("INSERT INTO " . $table_name . "(" . $columns . " ) VALUES (" . $placeholder . ")");
+        return $this->Query->execute($placeholder_values);
+    }
+
+    // SELECT * FROM users INNER JOIN admin ON users.id = admin.id
+
+    public function Join($table1, $table2, $condition, $join_name = ""){
+
+        if(empty($join_name)){
+
+            $this->Query = $this->db->prepare("SELECT * FROM " . $table1 . " INNER JOIN " . $table2 . " ON " . $condition);
+            return $this->Query->execute();
+
+        } else if($join_name == "LEFT JOIN"){
+
+            $this->Query = $this->db->prepare("SELECT * FROM " . $table1 . " LEFT JOIN " . $table2 . " ON " . $condition);
+            return $this->Query->execute();
+
+        }
+
+    }
+
+
+
+
+
+
+
+
 }
