@@ -14,4 +14,9 @@ define('USERNAME', 'root');
 define('DATABASE', 'mvc');
 define('PASSWORD', '');
 
+/*
+    * Base URL
+*/
+
+define('Base_URL', 'http://localhost:8888/cmshappyday');
 ?>

@@ -270,6 +270,10 @@ class Database
             $this->Query = $this->db->prepare("SELECT * FROM " . $table1 . " LEFT JOIN " . $table2 . " ON " . $condition);
             return $this->Query->execute();
 
+        } else if ($join_name == "RIGHT JOIN"){
+
+            $this->Query = $this->db->prepare("SELECT * FROM " . $table1 . " RIGHT JOIN " . $table2 . " ON " . $condition);
+            return $this->Query->execute();
         }
 
     }

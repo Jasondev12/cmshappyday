@@ -17,7 +17,9 @@ class Profile_controller extends Cmshappyday
     {
 
         $store_model = $this->model("user_model");
-        $store_model->fetch_records(); 
+        //$store_model->fetch_records();
+        $this->helper("url");
+        $this->helper("form");
         $this->view("user_view");
         
     }
