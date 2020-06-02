@@ -138,7 +138,7 @@ function form_button($fields)
  * Form Opening Helper
  */
 
-function form_open($action = "", $method = "", $options = [])
+function form_open($action, $method, $options = [])
 {
 
     if (array_key_exists("id", $options)) {
@@ -161,7 +161,7 @@ function form_open($action = "", $method = "", $options = [])
  * Form Close Helper
  */
 
-function form_multipart($action, $method, $options)
+function form_multipart($action, $method, $options = [])
 {
 
     if (array_key_exists("class", $options)) {

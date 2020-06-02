@@ -10,24 +10,16 @@
 
     
    
-       <?php echo form_multipart("profile_controller/form_submit", "POST", ['class' => 'form-class']); ?>
-      
-       <?php echo form_input(['type' => 'password','name' => 'username', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer Mot de passe', 'value' => '']); ?> <br>
+       <?php echo form_open("profile_controller/form_submit/3", "post", ['class' => 'form-class']); ?>
 
-       <?php echo form_input(['type' => 'email','name' => 'username', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer Email', 'value' => '']); ?> <br>
+       <?php echo form_input(['type' => 'text','name' => 'name', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre nom', 'value' => '']); ?> <br>
 
-       <?php echo form_input(['type' => 'text','name' => 'username', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer Nom', 'value' => '']); ?> <br>
-
-       <?php echo form_input(['type' => 'file','name' => 'username', 'id' => 'input-id', 'class' => 'form-control']); ?> <br>
+       <?php echo form_input(['type' => 'text','name' => 'address', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre adresse', 'value' => '']); ?> <br>
 
        <?php $data = ['name' => 'login', "class" => 'btn btn-default', "id" => 'btn-id', 'value' => 'Login'] ?>
 
        <?php echo form_submit($data); ?> <br>
-
-       <?php echo form_button(['name' => 'btn', 'class' => 'btn-primary', 'id' => 'btn', 'value' => 'Cliquez moi']); ?>
-
-       
-       <?php echo anchor("profile_controller/anchor", "Delete", ['class' => 'link']); ?>
+   
 
        <?php echo form_close(); ?>
 

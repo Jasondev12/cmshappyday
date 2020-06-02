@@ -1,6 +1,6 @@
 <?php
 
-function anchor($href, $value, $options)
+function anchor($href, $value, $options = [])
 {
     if (array_key_exists("class", $options)) {
         $class = $options['class'];
