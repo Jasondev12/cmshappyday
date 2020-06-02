@@ -37,16 +37,23 @@ class Cmshappyday
     /*
      * Helper method check the helper availability
      */
-    public function helper($helper_name)
+    public function helper($helper_names)
     {
 
-        if (file_exists(("../system/helpers/" . $helper_name . ".php"))) {
+        if (!empty($helper_names)) {
+            foreach ($helper_names as $helper_name):
 
-            require_once "../system/helpers/" . $helper_name . ".php";
-        } else {
+                if (file_exists(("../system/helpers/" . $helper_name . ".php"))) {
 
-            die("<div style='background-color:#f1f4f4;color:#afaaaa;border: 1px dotted #afaaaa;padding: 10px; border-radius: 4px'>Sorry Helper is not found</div>");
+                    require_once "../system/helpers/" . $helper_name . ".php";
 
+                } else {
+
+                    die("<div style='background-color:#f1f4f4;color:#afaaaa;border: 1px dotted #afaaaa;padding: 10px; border-radius: 4px'>Sorry Helper is not found</div>");
+
+                }
+
+            endforeach;
         }
 
     }

@@ -18,10 +18,17 @@ class Profile_controller extends Cmshappyday
 
         $store_model = $this->model("user_model");
         //$store_model->fetch_records();
-        $this->helper("url");
-        $this->helper("form");
+        $this->helper(['form', 'html', 'url']);
         $this->view("user_view");
         
+    }
+
+    public function submit_form(){
+        echo "form is submit";
+    }
+
+    public function anchor(){
+        echo "Anchor helper";
     }
 }
 ?>
