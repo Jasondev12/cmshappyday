@@ -28,9 +28,19 @@ class Profile_controller extends Cmshappyday
     public function form_submit()
     {
 
-        echo $this->post('name');
-        echo $this->post('address');
-        echo $this->uri(2);
+        $this->validation('full_name', 'Full Name', 'not_int|min_len|8|required');
+        $this->validation('address', 'Address', 'not_int|required');
+        $this->validation('password', 'Password', 'min_len|5|required');
+        $this->validation('confirm_password', 'Confirm Password', 'confirm|password|required');
+        $this->validation('email', 'Email', 'unique|users|required');
+        
+        if ($this->run()) {
+            echo $this->post('full_name');
+            echo "<br>";
+            echo $this->post("address");
+        } else {
+            print_r($this->errors);
+        }
 
     }
 
@@ -39,3 +49,4 @@ class Profile_controller extends Cmshappyday
         echo "Anchor helper";
     }
 }
+    

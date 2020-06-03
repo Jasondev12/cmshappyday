@@ -2,7 +2,7 @@
 
 class Cmshappyday
 {
-
+    use form_validation;
     public function __construct()
     {
 
@@ -101,8 +101,9 @@ class Cmshappyday
 
     /*
      * URI function
-    */
-    public function uri($segment){
+     */
+    public function uri($segment)
+    {
 
         if (isset($_GET['url'])) {
 
