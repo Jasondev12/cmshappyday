@@ -14,13 +14,33 @@
 
        <?php echo form_input(['type' => 'text', 'name' => 'full_name', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer nom complet', 'value' => '']); ?> <br>
 
+       <?php if(!empty($this->errors['full_name'])): ?>
+        <?php echo $this->errors['full_name']; ?>
+       <?php endif; ?><br>
+
        <?php echo form_input(['type' => 'email', 'name' => 'email', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre email', 'value' => '']); ?> <br>
+
+       <?php if(!empty($this->errors['email'])): ?>
+        <?php echo $this->errors['email']; ?>
+       <?php endif; ?><br>
 
        <?php echo form_input(['type' => 'text', 'name' => 'address', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre adresse', 'value' => '']); ?> <br>
 
+       <?php if(!empty($this->errors['address'])): ?>
+        <?php echo $this->errors['address']; ?>
+       <?php endif; ?><br>
+
        <?php echo form_input(['type' => 'password', 'name' => 'password', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre mot de passe', 'value' => '']); ?> <br>
 
+       <?php if(!empty($this->errors['password'])): ?>
+        <?php echo $this->errors['password']; ?>
+       <?php endif; ?><br>
+
        <?php echo form_input(['type' => 'password', 'name' => 'confirm_password', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Confirmation du mot de passe', 'value' => '']); ?> <br>
+
+       <?php if(!empty($this->errors['confirm_password'])): ?>
+        <?php echo $this->errors['confirm_password']; ?>
+       <?php endif; ?><br>
 
        <?php $data = ['name' => 'login', "class" => 'btn btn-default', "id" => 'btn-id', 'value' => 'Login']?>
 

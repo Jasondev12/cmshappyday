@@ -111,8 +111,40 @@ trait form_validation
                  */
                 $password = trim($_GET[$confirm_rule_password]);
             }
+
             if ($data !== $password) {
                 return $this->errors[$field_name] = $label . " is not matched";
+            }
+        }
+
+        /*
+         * Check the email availability
+         */
+
+        if (in_array("uniqueEmail", $rules)) {
+            /*
+             * Get the index of unique rule
+             */
+            $unique_index = array_search("uniqueEmail", $rules);
+            /*
+             * Get the index of table name
+             */
+            $table_index = $unique_index + 1;
+            /*
+             * Get table name
+             */
+            $table_name = $rules[$table_index];
+            /*
+             * Include the database file
+             */
+
+            require_once "../system/libraries/database.php";
+
+            $db = new Database;
+            if($db->Select_Where($table_name, [$field_name => $data])){
+                if($db->Count() > 0){
+                    return $this->errors[$field_name] = $label . " is already exist";
+                }
             }
         }
     }

@@ -85,7 +85,7 @@ class Database
     public function Select($table_name, $options = "")
     {
 
-        if (empty($options)) {
+        if (empty($options)){
 
             $this->Query = $this->db->prepare("SELECT * FROM " . $table_name);
             return $this->Query->execute();
@@ -105,7 +105,7 @@ class Database
     {
         $columns = "";
         $db_values = "";
-        foreach ($options as $key => $values):
+        foreach($options as $key => $values ):
 
             $columns .= $key . " = ? AND ";
             $db_values .= $values . ",";

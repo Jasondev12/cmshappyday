@@ -32,14 +32,17 @@ class Profile_controller extends Cmshappyday
         $this->validation('address', 'Address', 'not_int|required');
         $this->validation('password', 'Password', 'min_len|5|required');
         $this->validation('confirm_password', 'Confirm Password', 'confirm|password|required');
-        $this->validation('email', 'Email', 'unique|users|required');
+        $this->validation('email', 'Email', 'uniqueEmail|users|required');
         
-        if ($this->run()) {
+        
+        if($this->run()) {
             echo $this->post('full_name');
             echo "<br>";
             echo $this->post("address");
+            echo "<br>";
+            echo $this->post("email");
         } else {
-            print_r($this->errors);
+            $this->view("user_view");
         }
 
     }
