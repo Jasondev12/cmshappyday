@@ -2,7 +2,7 @@
 
 class Cmshappyday
 {
-    use form_validation;
+    use form_validation, files_upload;
     public function __construct()
     {
 

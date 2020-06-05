@@ -1,5 +1,7 @@
 <?php
 error_reporting(0);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 class Database
 {
@@ -42,6 +44,7 @@ class Database
             return $this->Query->execute($options);
 
         }
+
     }
 
     /*
@@ -49,7 +52,9 @@ class Database
      */
     public function Count()
     {
+
         return $this->Query->rowCount();
+
     }
 
     /*
@@ -58,7 +63,7 @@ class Database
     public function AllCount($table_name)
     {
 
-        // SELECT * FROM table_name
+        // SELLECT * FROM table_name
         $this->Query = $this->db->prepare("SELECT * FROM " . $table_name);
         $this->Query->execute();
         return $this->Query->rowCount();
@@ -85,7 +90,7 @@ class Database
     public function Select($table_name, $options = "")
     {
 
-        if (empty($options)){
+        if (empty($options)) {
 
             $this->Query = $this->db->prepare("SELECT * FROM " . $table_name);
             return $this->Query->execute();
@@ -96,62 +101,26 @@ class Database
             return $this->Query->execute();
 
         }
+
     }
 
     /*
-     * Select_Where method accept the select query along with WHERE statement
+     * Select_Where method accept the select query along with WHERE statemnet
      */
     public function Select_Where($table_name, $options)
     {
-        $columns = "";
-        $db_values = "";
-        foreach($options as $key => $values ):
-
-            $columns .= $key . " = ? AND ";
-            $db_values .= $values . ",";
-
-        endforeach;
-
-        /*
-         * Remove AND operator from the end of statement
-         */
-        $columns = rtrim($columns, " AND");
-
-        /*
-         * Remove comma from the end of statement
-         */
-        $db_values = rtrim($db_values, ",");
-        /*
-         * Assign string to an array
-         */
-        $db_values = explode(",", $db_values);
-
-        /*
-         * Write the Select_Where query
-         */
-        $this->Query = $this->db->prepare("SELECT * FROM " . $table_name . " WHERE " . $columns);
-        return $this->Query->execute($db_values);
-    }
-
-    /*
-     * Delete method
-     */
-    public function Delete($table_name, $options)
-    {
-        $columns = "";
-        $db_values = "";
+        $columns = '';
+        $db_values = '';
         foreach ($options as $key => $values):
 
             $columns .= $key . " = ? AND ";
             $db_values .= $values . ",";
 
         endforeach;
-
         /*
          * Remove AND operator from the end of statement
          */
         $columns = rtrim($columns, " AND");
-
         /*
          * Remove comma from the end of statement
          */
@@ -162,25 +131,59 @@ class Database
         $db_values = explode(",", $db_values);
 
         /*
-         * Write the Select_Where query
+         * Wirte the select_where query
          */
-        $this->Query = $this->db->prepare("DELETE FROM " . $table_name . " WHERE " . $columns);
+
+        $this->Query = $this->db->prepare("SELECT * FROM " . $table_name . " WHERE " . $columns);
         return $this->Query->execute($db_values);
+
     }
 
     /*
-     * Update method
+     * Delete Method
+     */
+
+    public function Delete($table_name, $options)
+    {
+        $columns = '';
+        $db_values = '';
+        foreach ($options as $key => $values):
+
+            $columns .= $key . " = ? AND ";
+            $db_values .= $values . ",";
+
+        endforeach;
+        /*
+         * Remove AND operator from the end of statement
+         */
+        $columns = rtrim($columns, " AND");
+        /*
+         * Remove comma from the end of statement
+         */
+        $db_values = rtrim($db_values, ",");
+        /*
+         * Assign string to an array
+         */
+        $db_values = explode(",", $db_values);
+
+        /*
+         * Wirte the select_where query
+         */
+
+        $this->Query = $this->db->prepare("DELETE FROM " . $table_name . " WHERE " . $columns);
+        return $this->Query->execute($db_values);
+
+    }
+
+    /*
+     * Update Method
      */
 
     public function Update($table_name, $set_array, $options)
     {
 
-        // $this->Query = $this->db->prepare("UPDATE users SET name =?, adress = ? WHERE id = ? AND email = ? ");
-        //$this->Query->execute([$name, $address, $id]);
-
-        $set_columns = "";
-        $set_values = "";
-
+        $set_columns = '';
+        $set_values = '';
         foreach ($set_array as $key => $values):
             $set_columns .= $key . " = ?,";
             $set_values .= $values . ",";
@@ -188,11 +191,10 @@ class Database
         /*
          * Remove comma from the right/end of statment/string
          */
-
         $set_columns = rtrim($set_columns, ",");
 
-        $where_columns = "";
-        $where_values = "";
+        $where_columns = '';
+        $where_values = '';
         foreach ($options as $key => $values):
 
             $where_columns .= $key . " = ? AND ";
@@ -200,7 +202,7 @@ class Database
 
         endforeach;
         /*
-         * Remove AND operator from the end of statment/string
+         * remove AND operator from the end of statment/string
          */
         $where_columns = rtrim($where_columns, " AND");
         /*
@@ -216,32 +218,33 @@ class Database
 
         $this->Query = $this->db->prepare("UPDATE " . $table_name . " SET " . $set_columns . " WHERE " . $where_columns);
         return $this->Query->execute($combine);
+
     }
 
     /*
-     * Insert method
+     * Insert Method
      */
 
     public function Insert($table_name, $columns_values)
     {
 
         // $this->Query = $this->db->prepare("INSERT INTO users (name, address ) VALUES (?,?)");
-        // $this->Query->execute([$name, $address]);
+        //$this->Query->execute([$name, $address]);
 
-        $columns = "";
-        $placeholder = "";
-        $placeholder_values = "";
+        $columns = '';
+        $placeholder = '';
+        $placeholder_values = '';
         foreach ($columns_values as $key => $values):
 
             $columns .= $key . ",";
-            /**
-             * Replace colum name on ?,
+            /*
+             * Repalce column name on ?,
              */
             $placeholder .= str_replace($key, "?,", $key);
             $placeholder_values .= $values . ",";
 
         endforeach;
-        /**
+        /*
          * Remove comma from the end of string/statement
          */
         $columns = rtrim($columns, ",");
@@ -249,40 +252,32 @@ class Database
         $placeholder_values = rtrim($placeholder_values, ",");
         $placeholder_values = explode(",", $placeholder_values);
 
-        /**
+        /*
          * Write Insert Query
          */
-        $this->Query = $this->db->prepare("INSERT INTO " . $table_name . "(" . $columns . " ) VALUES (" . $placeholder . ")");
+
+        $this->Query = $this->db->prepare("INSERT INTO " . $table_name . "(" . $columns . ") VALUES (" . $placeholder . ")");
         return $this->Query->execute($placeholder_values);
+
     }
 
-    // SELECT * FROM users INNER JOIN admin ON users.id = admin.id
+    // SELECT * FROM users INNER JOIN teacher ON users.id = teacher.id
 
-    public function Join($table1, $table2, $condition, $join_name = ""){
+    public function Join($table1, $table2, $condition, $join_name = "")
+    {
 
-        if(empty($join_name)){
+        if (empty($join_name)) {
 
             $this->Query = $this->db->prepare("SELECT * FROM " . $table1 . " INNER JOIN " . $table2 . " ON " . $condition);
             return $this->Query->execute();
-
-        } else if($join_name == "LEFT JOIN"){
-
+        } else if ($join_name == "LEFT JOIN") {
             $this->Query = $this->db->prepare("SELECT * FROM " . $table1 . " LEFT JOIN " . $table2 . " ON " . $condition);
             return $this->Query->execute();
-
-        } else if ($join_name == "RIGHT JOIN"){
-
+        } else if ($join_name == "RIGHT JOIN") {
             $this->Query = $this->db->prepare("SELECT * FROM " . $table1 . " RIGHT JOIN " . $table2 . " ON " . $condition);
             return $this->Query->execute();
         }
 
     }
-
-
-
-
-
-
-
 
 }
