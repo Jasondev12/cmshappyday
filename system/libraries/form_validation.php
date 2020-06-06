@@ -173,16 +173,22 @@ trait form_validation
         }
     }
 
-    /*
-     * Set form values
-     */
+     /*
+          * Set form values
+    */ 
 
-    public function set_value($field_name)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "post") {
-            return $_POST[$field_name];
-        } else if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == "get") {
-            return $_GET[$field_name];
+    public function set_value($field_name){
+        if($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "post"){
+            if(isset($_POST[$field_name])){
+                return $_POST[$field_name];
+            }
+            
+        } else if($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == "get") {
+            if(isset($_GET[$field_name])){
+               return $_GET[$field_name];
+            } 
+           
         }
+
     }
 }

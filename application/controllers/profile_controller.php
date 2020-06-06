@@ -35,12 +35,20 @@ class Profile_controller extends Cmshappyday
 
         ];
         $this->file($data);
-      //  $this->validation('full_name', 'Full Name', 'not_int|min_len|8|required');
-      //  $this->validation('address', 'Address', 'not_int|required');
-      //  $this->validation('password', 'Password', 'min_len|5|required');
-      //  $this->validation('confirm_password', 'Confirm Password', 'confirm|password|required');
-      //  $this->validation('email', 'Email', 'unique|users|required');
+
+        $this->validation('full_name', 'Full Name', 'not_int|min_len|8|required');
+        $this->validation('address', 'Address', 'not_int|required');
+        $this->validation('password', 'Password', 'min_len|5|required');
+        $this->validation('confirm_password', 'Confirm Password', 'confirm|password|required');
+        $this->validation('email', 'Email', 'unique|users|required');
         
+
+        if($this->file_run() & $this->run()){
+            echo $this->file_data['file_name'];
+        } else {
+            $this->view("user_view");
+        }
+     
         
       //  if($this->run()) {
       //      echo $this->post('full_name');

@@ -9,7 +9,7 @@ class Route
      * @Auther Name       : Maes Jason
      * @License           : cmshappyday
      * @Verion            : 1.0.0
-     * @Description       : Route class get thr url, split the url & sanitize the url
+     * @Description       : Route class get the url, split the url & sanitize the url
 
      */
 

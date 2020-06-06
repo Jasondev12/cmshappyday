@@ -7,42 +7,46 @@
 </head>
 <body>
     <h1>User View</h1>
-
+        <!-- MULTIPART -->
        <?php echo form_multipart("profile_controller/form_submit/3", "post", ['class' => 'form-class']); ?>
-
-       <?php echo form_input(['type' => 'text', 'name' => 'full_name', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer nom complet', 'value' => $this->set_value('full_name')]); ?> <br>
-
-       <?php if(!empty($this->errors['full_name'])): ?>
+        <!-- FULL NAME -->
+        <?php echo form_input(['type' => 'text', 'name' => 'full_name', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer nom complet', 'value' => $this->set_value('full_name')]); ?> <br>
+        <!-- ERRORS FULL NAME -->
+        <?php if(!empty($this->errors['full_name'])): ?>
         <?php echo $this->errors['full_name']; ?>
-       <?php endif; ?><br>
-
-       <?php echo form_input(['type' => 'file', 'name' => 'image', 'id' => 'input-id', 'class' => 'form-control']); ?> <br>
-
-       <?php echo form_input(['type' => 'email', 'name' => 'email', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre email', 'value' => $this->set_value('email')]); ?> <br>
-
-       <?php if(!empty($this->errors['email'])): ?>
+        <?php endif; ?><br>
+        <!-- IMAGE -->
+        <?php echo form_input(['type' => 'file', 'name' => 'image', 'id' => 'input-id', 'class' => 'form-control']); ?> <br>
+        <!-- ERRORS IMAGE -->
+        <?php if(!empty($this->file_errors['image'])): ?>
+        <?php echo $this->file_errors['image']; ?>
+        <?php endif; ?><br>
+        <!-- EMAIL -->    
+        <?php echo form_input(['type' => 'email', 'name' => 'email', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre email', 'value' => $this->set_value('email')]); ?> <br>
+        <!-- ERRORS EMAIL -->
+        <?php if(!empty($this->errors['email'])): ?>
         <?php echo $this->errors['email']; ?>
-       <?php endif; ?><br>
-
-       <?php echo form_input(['type' => 'text', 'name' => 'address', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre adresse', 'value' => $this->set_value('address')]); ?> <br>
-
-       <?php if(!empty($this->errors['address'])): ?>
+        <?php endif; ?><br>
+        <!-- ADDRESS -->
+        <?php echo form_input(['type' => 'text', 'name' => 'address', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre adresse', 'value' => $this->set_value('address')]); ?> <br>
+        <!-- ERRORS ADDRESS -->
+        <?php if(!empty($this->errors['address'])): ?>
         <?php echo $this->errors['address']; ?>
-       <?php endif; ?><br>
-
-       <?php echo form_input(['type' => 'password', 'name' => 'password', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre mot de passe', 'value' => $this->set_value('password')]); ?> <br>
-
-       <?php if(!empty($this->errors['password'])): ?>
+        <?php endif; ?><br>
+        <!-- PASSWORD -->
+        <?php echo form_input(['type' => 'password', 'name' => 'password', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Entrer votre mot de passe', 'value' => $this->set_value('password')]); ?> <br>
+        <!-- ERRORS PASSWORD -->
+        <?php if(!empty($this->errors['password'])): ?>
         <?php echo $this->errors['password']; ?>
-       <?php endif; ?><br>
-
-       <?php echo form_input(['type' => 'password', 'name' => 'confirm_password', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Confirmation du mot de passe', 'value' => $this->set_value('confirm_password')]); ?> <br>
-
-       <?php if(!empty($this->errors['confirm_password'])): ?>
+        <?php endif; ?><br>
+        <!-- CONFIRM PASSWORD -->
+        <?php echo form_input(['type' => 'password', 'name' => 'confirm_password', 'id' => 'input-id', 'class' => 'form-control', 'placeholder' => 'Confirmation du mot de passe', 'value' => $this->set_value('confirm_password')]); ?> <br>
+        <!-- ERRORS CONFIRM PASSWORD -->
+        <?php if(!empty($this->errors['confirm_password'])): ?>
         <?php echo $this->errors['confirm_password']; ?>
-       <?php endif; ?><br>
-
-       <?php $data = ['name' => 'login', "class" => 'btn btn-default', "id" => 'btn-id', 'value' => 'Login']?>
+        <?php endif; ?><br>
+        <!-- BTN LOGIN -->
+        <?php $data = ['name' => 'login', "class" => 'btn btn-default', "id" => 'btn-id', 'value' => 'Login']?>
 
        <?php echo form_submit($data); ?> <br>
 
