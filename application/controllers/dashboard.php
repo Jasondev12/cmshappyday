@@ -11,7 +11,7 @@ class Dashboard extends Cmshappyday
     public function profile()
     {
 
-        echo 'Dashboard';
+        $this->view("profile");
 
     }
 }

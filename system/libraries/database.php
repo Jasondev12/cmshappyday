@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 class Database
 {
-
+    use session;
     private $host = HOST;
     private $database = DATABASE;
     private $username = USERNAME;

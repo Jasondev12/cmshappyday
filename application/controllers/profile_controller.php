@@ -18,9 +18,7 @@ class Profile_controller extends Cmshappyday
     public function my_method()
     {
 
-        //$store_model->fetch_records();
         $this->view("user_view");
-
         //redirect("dashboard/profile");
 
     }
@@ -28,10 +26,10 @@ class Profile_controller extends Cmshappyday
     public function form_submit()
     {
         $data = [
-        'file_name' => 'image',
-        'allowed_extensions' => 'jpg|png',
-        'upload_path' => 'images/',
-        'label' => 'Image'
+            'file_name' => 'image',
+            'allowed_extensions' => 'jpg|png',
+            'upload_path' => 'images/',
+            'label' => 'Image',
 
         ];
         $this->file($data);
@@ -41,25 +39,19 @@ class Profile_controller extends Cmshappyday
         $this->validation('password', 'Password', 'min_len|5|required');
         $this->validation('confirm_password', 'Confirm Password', 'confirm|password|required');
         $this->validation('email', 'Email', 'unique|users|required');
-        
 
-        if($this->file_run() & $this->run()){
-            echo $this->file_data['file_name'];
+        if ($this->file_run() & $this->run()) {
+            $session_data = [
+                'id' => 4,
+                'name' => $this->post('full_name'),
+                'email' => $this->post('email'),
+            ];
+            $this->set_session($session_data);
+            $this->set_flash("account_success", "Votre compte a été créé avec succès");
+            redirect("dashboard/profile");
         } else {
             $this->view("user_view");
         }
-     
-        
-      //  if($this->run()) {
-      //      echo $this->post('full_name');
-      //      echo "<br>";
-      //      echo $this->post("address");
-      //      echo "<br>";
-      //      echo $this->post("email");
-      //  } else {
-      //      $this->view("user_view");
-      //  }
-
     }
 
     public function anchor()
@@ -67,4 +59,3 @@ class Profile_controller extends Cmshappyday
         echo "Anchor helper";
     }
 }
-    

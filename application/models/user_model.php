@@ -24,4 +24,8 @@ class User_model extends Database
 
         }
     }
+
+    public function fetch_session(){
+        return $this->get_session('id');
+    }
 }

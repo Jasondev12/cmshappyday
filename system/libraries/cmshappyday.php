@@ -2,10 +2,10 @@
 
 class Cmshappyday
 {
-    use form_validation, files_upload;
+    use form_validation, files_upload, session;
     public function __construct()
     {
-
+        $this->start();
         if (file_exists("../system/config/autoload.php")) {
             require_once "../system/config/autoload.php";
             $helpers = $autoload['helpers'];
