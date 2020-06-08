@@ -60,4 +60,32 @@ trait Session
             unset($_SESSION[$name]);
         }
     }
+
+    public function unset_session($name)
+    {
+
+        /*
+         * Unset session data
+         */
+
+        if (!empty($name)) {
+
+            if (is_array($name)) {
+                foreach ($name as $key):
+                    unset($_SESSION[$key]);
+                endforeach;
+            } else {
+                unset($_SESSION[$name]);
+            }
+        }
+    }
+
+    public function destroy_session(){
+
+        /*
+         * Destroy whole session
+         */
+        session_destroy();
+
+    }
 }

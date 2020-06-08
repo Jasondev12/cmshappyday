@@ -187,7 +187,19 @@ trait form_validation
             if(isset($_GET[$field_name])){
                return $_GET[$field_name];
             } 
-           
+        }
+    }
+
+    /*
+     * Password hash
+    */
+
+    public function hash($password){
+
+        if(!empty($password)){
+            
+            return password_hash($password, PASSWORD_DEFAULT);
+
         }
 
     }

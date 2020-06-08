@@ -9,6 +9,9 @@
     <h1>Profile View</h1>
 
     <?php $this->flash("account_success", "alert-success")?>
+    <?= $this->get_session('id'); ?><br>
+    <?= $this->get_session('name'); ?><br>
+    <?= $this->get_session('email'); ?><br>
 
 </body>
 </html>

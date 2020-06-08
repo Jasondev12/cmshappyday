@@ -58,4 +58,11 @@ class Profile_controller extends Cmshappyday
     {
         echo "Anchor helper";
     }
+
+    public function logout()
+    {
+
+        $this->destroy_session();
+
+    }
 }
