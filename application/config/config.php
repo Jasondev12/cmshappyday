@@ -2,10 +2,13 @@
 
 $database = [
 
-    'host' =>'localhost',
-    'username' =>'root',
-    'database' =>'mvc',
-    'password' =>'',
+    /**
+     * Add your database informations
+     */
+    'host' => '',
+    'username' => '',
+    'database' => '',
+    'password' => '',
 
 ];
 
@@ -13,14 +16,12 @@ $default = [
 
     'controller' => 'welcome',
     'method' => 'index',
-    'param' =>  []
+    'param' => [],
 
 ];
 
 $setting = [
 
-    'base_url' => 'http://localhost:8888/cmshappyday'
+    'base_url' => 'http://localhost:8888/cmshappyday',
 
 ];
-
-?> 

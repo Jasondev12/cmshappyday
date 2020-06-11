@@ -1,12 +1,14 @@
 <?php
 
 /**
-    * autoload helpers 
-*/
+ * autoload helpers
+ */
 
 $autoload = [
-
-    'helpers' => ['form', 'html', 'url', 'redirect']
+    /**
+     * Add helpers in the array
+     */
+    'helpers' => [],
 ]
 
 ?>

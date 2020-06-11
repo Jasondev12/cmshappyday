@@ -2,13 +2,11 @@
 
 class Welcome extends Cmshappyday
 {
-    public function __construct()
-    {
-        echo 'Welcome Controller';
-    }
 
     public function index()
     {
-        echo "Index method from welcome controller";
+        $data = "Construisons un site web rapide avec CMS HAPPY DAY";
+        $this->view("app", $data);
     }
 }
+?>
